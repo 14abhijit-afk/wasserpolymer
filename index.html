@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasser Polymer Pvt. Ltd</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { scroll-behavior: smooth; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333; }
+        
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-orange: #f97316;
+            --neutral-gray: #64748b;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-blue), #3b82f6);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: .8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--accent-orange); }
+        
+        .hero {
+            background: linear-gradient(rgba(30,58,138,0.9), rgba(59,130,246,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><rect fill="%23f3f4f6" width="1000" height="300"/><circle fill="%23dbeafe" cx="200" cy="100" r="80"/><circle fill="%23bfdbfe" cx="600" cy="150" r="60"/><circle fill="%23a5b4fc" cx="800" cy="80" r="40"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .cta-button {
+            background: var(--accent-orange);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(249,115,22,0.4);
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .products {
+            background: var(--light-bg);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+        
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .color-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .color-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .color-swatch {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+         /* Accordion styles inside Products */
+.products-accordion {
+    max-width: 900px;
+    margin: 2rem auto 0;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 0.75rem 0;
+}
+
+/* hide the main toggles */
+.accordion-item input[type="checkbox"] {
+    display: none;
+}
+
+/* main heading row */
+.accordion-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--primary-blue);
+    font-size: 1.05rem;
+}
+
+.accordion-label span.chevron {
+    font-size: 0.9rem;
+}
+
+/* content container for each main heading */
+.accordion-content {
+    display: none;
+    padding: 0.5rem 0 0.75rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* show content when main checkbox is checked */
+.accordion-item input[type="checkbox"]:checked ~ .accordion-content {
+    display: block;
+}
+
+/* simple list look */
+.accordion-content ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+}
+
+/* nested submenu (Epoxy, Polyurethane) */
+.sub-accordion-item {
+    margin-top: 0.4rem;
+}
+
+/* hide nested toggles */
+.sub-accordion-item input[type="checkbox"] {
+    display: none;
+}
+
+.sub-accordion-label {
+    cursor: pointer;
+    font-weight: 600;
+    color: #111827;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.sub-accordion-label .chevron {
+    font-size: 0.8rem;
+}
+
+.sub-accordion-content {
+    display: none;
+    margin-top: 0.3rem;
+    padding-left: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.sub-accordion-item input[type="checkbox"]:checked ~ .sub-accordion-content {
+    display: block;
+}
+
+        /* ABOUT SECTION WITH PDF */
+        .about {
+            background: var(--light-bg);
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+        
+        .pdf-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 4rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+			text-align: center;
+        }
+        
+        .pdf-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-blue), #3b82f6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 15px 40px rgba(30,58,138,0.3);
+        }
+        
+        .pdf-button {
+            background: linear-gradient(135deg, var(--primary-blue), #3b82f6);
+            color: white;
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(30,58,138,0.4);
+        }
+        
+        .pdf-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(30,58,138,0.5);
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+        }
+        
+        .pdf-info {
+            margin-top: 2rem;
+            color: var(--neutral-gray);
+            font-size: 1.1rem;
+        }
+
+        /* CLIENTS SECTION */
+        .clients {
+            background: var(--white);
+            padding: 5rem 2rem;
+        }
+
+        .clients-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .clients-track {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            animation: scrollClients 30s linear infinite;
+            white-space: nowrap;
+            width: max-content;
+        }
+
+        .client-logo {
+            height: 80px;
+            object-fit: contain;
+            filter: grayscale(20%);
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .client-logo:hover {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        @keyframes scrollClients {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .contact {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+        }
+        
+        .contact form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .contact input, .contact textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .contact input::placeholder, .contact textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .pdf-container {
+                padding: 2rem;
+            }
+            .client-logo {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">ISO 9001:2008 Certified Organization</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#clients">Clients</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Wasser Polymer Pvt. Ltd</h1>
+            <p>Manufacturers of high-quality industrial and architectural colors. Precision, durability, and vibrant finishes for every application.</p>
+            <a href="#products" class="cta-button">Explore Our Offerings</a>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+    <h2 class="section-title">Our Offerings</h2>
+
+    <div class="color-grid">
+
+        <!-- Architectural Paints -->
+<div class="color-card">
+    <img src="generated-image.png" alt="Modern Indian house exterior painted in vibrant terracotta red architectural coatings" style="width: 200px; height: 140px; border-radius: 12px;  style="object-fit: cover;"
+    <h3>Architectural Paints</h3>
+    <p>Architectural exteriors and premium interiors</p>
+
+    <div class="products-accordion">
+        <div class="accordion-item">
+            <input type="checkbox" id="arch-paints-toggle">
+            <label class="accordion-label" for="arch-paints-toggle">
+                <span>Architectural Paints</span>
+                <span class="chevron">▾</span>
+            </label>
+            <div class="accordion-content">
+                <ul>
+                    <li><a href="perzino.pdf" target="_blank">Perzino</a></li>
+                    <li><a href="rustino.pdf" target="_blank">Rustino</a></li>
+                    <li><a href="spraytex.pdf" target="_blank">Spraytex</a></li>
+                    <li><a href="supertex.pdf" target="_blank">Supertex</a></li>
+                    <li>Tile - O - Fix</li>
+                    <li>TuffBond 320</li>
+                    <li>Tuffine</li>
+                    <li>Tuffshine Elasto-Coat</li>
+                    <li>Tuffshine Suprano</li>
+                    <li>Weather King Q</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Functional Coatings -->
+        <div class="color-card">
+          <img src="generated-image (2).png" alt="industrial tank coated with heat reistant paint in factory in high heat condition" style="width: 200px; height: 140px; border-radius: 12px;  style="object-fit: cover;"
+            <h3>Functional Coatings</h3>
+            <p>Advanced engineered coatings offering peerless insulation against extreme heat & fire</p>
+
+            <div class="products-accordion">
+                <div class="accordion-item">
+                    <input type="checkbox" id="functional-coatings-toggle">
+                    <label class="accordion-label" for="functional-coatings-toggle">
+                        <span>Functional Coatings</span>
+                        <span class="chevron">▾</span>
+                    </label>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>Fire-X-101 WB</li>
+                            <li>Fire-X-201 SB</li>
+                            <li>Therma King Final</li>
+                            <li>Therma King Supreme Ace</li>
+                            <li>Therma King Supreme High Heat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industrial Paints -->
+        <div class="color-card">
+            <img src="generated-image (3).png" alt="Industrial Machinery with Protective color Coating" style="width: 200px; height: 140px; border-radius: 12px;  style="object-fit: cover;"
+            <h3>Industrial Paints</h3>
+            <p>Resilient coatings for demanding industrial environments</p>
+
+            <div class="products-accordion">
+                <div class="accordion-item">
+                    <input type="checkbox" id="industrial-paints-toggle">
+                        <label class="accordion-label" for="industrial-paints-toggle">
+                            <span>Industrial Paints</span>
+                            <span class="chevron">▾</span>
+                        </label>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>Chlorinated Rubber Coatings</li>
+
+                            <!-- Epoxy Coatings sub-accordion -->
+                            <li class="sub-accordion-item">
+                                <input type="checkbox" id="epoxy-toggle">
+                                <label class="sub-accordion-label" for="epoxy-toggle">
+                                    <span class="chevron">▾</span> Epoxy Coatings
+                                </label>
+                                <div class="sub-accordion-content">
+                                    <ul>
+                                        <li>METOXY 5040</li>
+                                        <li>METOXY 5060</li>
+                                        <li>METOXY 5070</li>
+                                        <li>METOXY 5090</li>
+                                        <li>METOXY 5150 (EPOXY GF)</li>
+                                        <li>METOXY 5150</li>
+                                        <li>PrimePro 1000</li>
+                                        <li>Rainbow Solutions METOXY 5252 Final</li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <!-- Poly Urethane Coating sub-accordion -->
+                            <li class="sub-accordion-item">
+                                <input type="checkbox" id="pu-toggle">
+                                <label class="sub-accordion-label" for="pu-toggle">
+                                    <span class="chevron">▾</span> Poly Urethane Coating
+                                </label>
+                                <div class="sub-accordion-content">
+                                    <ul>
+                                        <li>Polycoat 6020</li>
+                                        <li>Polycoat 6030</li>
+                                        <li>Polycoat Aqua 2000</li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specialty Coatings -->
+        <div class="color-card">
+            <img src="generated-image (4).png" alt="Marine Propellers with Specialty Anti-Corrosion Blue Coatings (see the generated image above" style="width: 200px; height: 140px; border-radius: 12px;  style="object-fit: cover;"
+            <h3>Specialty Coatings</h3>
+            <p>Tailored coatings for unique performance needs</p>
+
+            <div class="products-accordion">
+                <div class="accordion-item">
+                    <input type="checkbox" id="specialty-coatings-toggle">
+                    <label class="accordion-label" for="specialty-coatings-toggle">
+                        <span>Specialty Coatings</span>
+                        <span class="chevron">▾</span>
+                    </label>
+                    <div class="accordion-content">
+                        <p>Tailored coatings for unique performance needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+    <!-- ABOUT SECTION WITH ATTACHED PDF -->
+    <section id="about" class="about">
+        <div class="pdf-container">
+            <div class="pdf-icon">📄</div>
+            <h2 class="section-title">Company Profile</h2>
+
+            <p style="font-size: 1rem; margin-bottom: 2rem; color: var(--primary-blue);">
+                Wasser Polymer Pvt. Ltd., is an ISO 9001:2008 certified organization engaged in manufacturing, trading 
+                and supplying Paint Chemicals and Paints. Our organization holds expertise in manufacturing a trusted 
+                quality range of Chemicals and Paints, since 2011. Our product range includes Paint Chemicals, Exterior 
+                and Interior Paints, Fire Poof Paint, Epoxy Coatings, Polyurethane Coatings, Heat Resistant Coatings, 
+                Miscellaneous Coatings and others. The range offered by us is made using excellent quality ingredients 
+                that are procured from some of the most trusted vendors of the industry, most of which is of foreign 
+                origin.
+            </p>
+
+            <p style="font-size:1rem ; margin-bottom: 2rem; color: var(--primary-blue);">
+                Our collection is widely admired by the clients for its aesthetic appeal, abundant color schemes &
+                resistance against fungus that can ruin the walls. Our strength lies in highly trained manpower with rich
+                industry experience in the latest texture technologies and development tools. The entire range of
+                products is designed as per the client's preference and requirements,& is exported to the Indian
+                Subcontinent, Middle East & South East Asia.
+            </p>
+
+            <p style="font-size: 1rem; margin-bottom: 2rem; color: var(--primary-blue);">
+                Wasser Polymer is led by a team of seasoned professionals with exceptional qualifications and a strong track record 
+				of success in their respective domains. The company places a strong emphasis on research & development,continually 
+				innovating new products and enhancing existing ones. This commitment is backed by a state-of-the-art laboratory & a skilled team of trained personnel.
+            </p>
+
+
+            <!-- IMPORTANT: filename must exactly match your PDF name -->
+            <a href="ABOUT-WASSER.pdf" target="_blank" class="pdf-button">
+                👁️ View Company Profile PDF
+            </a>
+            <div class="pdf-info">
+                <p>ISO 9001:2008 Certified | Est. 2011 | Serving India & Exports</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTS SECTION -->
+    <section id="clients" class="clients">
+        <h2 class="section-title">Our Clients</h2>
+
+        <!-- Clients PDF block -->
+        <div class="pdf-container" style="margin-bottom: 3rem;">
+            <div class="pdf-icon">📄</div>
+            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; color: var(--primary-blue); text-align:center;">
+                View the complete list of our esteemed clients.
+            </p>
+            <a href="SOME OF OUR ESTEEMED CLIENTS.pdf" target="_blank" class="pdf-button">
+                👁️ View Clients List PDF
+            </a>
+            <div class="pdf-info">
+                <p>Corporate, industrial and institutional clients served across sectors.</p>
+            </div>
+        </div>
+
+        <!-- Logos slider -->
+        <div class="clients-wrapper">
+            <div class="clients-track">
+                <!-- First set of logos (use exact filenames as on your server) -->
+                <img src="Jaypee.jpg" alt="Client logo" class="client-logo">
+                <img src="ajanta.jpg" alt="Client logo" class="client-logo">
+                <img src="Smeltech Carbons.jpg" alt="Client logo" class="client-logo">
+                <img src="rabi.jpg" alt="Client logo" class="client-logo">
+                <img src="Hindustan-dorr-oliver.jpg" alt="Client logo" class="client-logo">
+                <img src="SUL.jpg" alt="Client logo" class="client-logo">
+                <img src="Great Eastern Energy Corporation Limited.jpg" alt="Client logo" class="client-logo">
+                <img src="India Power Corporation (Haldia) Limited.png" alt="Client logo" class="client-logo">
+                <img src="UB Group.jpg" alt="Client logo" class="client-logo">
+                <img src="vedic village.jpg" alt="Client logo" class="client-logo">
+                <img src="Coal india limited.jpg" alt="Client logo" class="client-logo">
+                <img src="Sanjeeva town.jpg" alt="Client logo" class="client-logo">
+                <img src="visa steel limited.jpg" alt="Client logo" class="client-logo">
+                <img src="IBM.jpg" alt="Client logo" class="client-logo">
+				<img src="military.PNG" alt="Client logo" class="client-logo">
+				<img src="mani.PNG" alt="Client logo" class="client-logo">
+				<img src="indianoil.PNG" alt="Client logo" class="client-logo">
+				<img src="bp.PNG" alt="Client logo" class="client-logo">
+
+                <!-- Duplicate set for seamless infinite scroll -->
+                <img src="Jaypee.jpg" alt="Client logo" class="client-logo">
+                <img src="ajanta.jpg" alt="Client logo" class="client-logo">
+                <img src="Smeltech Carbons.jpg" alt="Client logo" class="client-logo">
+                <img src="rabi.jpg" alt="Client logo" class="client-logo">
+                <img src="Hindustan-dorr-oliver.jpg" alt="Client logo" class="client-logo">
+                <img src="SUL.jpg" alt="Client logo" class="client-logo">
+                <img src="Great Eastern Energy Corporation-Limited.jpg" alt="Client logo" class="client-logo">
+                <img src="India Power Corporation (Haldia) Limited.png" alt="Client logo" class="client-logo">
+                <img src="UB Group.jpg" alt="Client logo" class="client-logo">
+                <img src="vedic village.jpg" alt="Client logo" class="client-logo">
+                <img src="Coal india limited.jpg" alt="Client logo" class="client-logo">
+                <img src="Sanjeeva town.jpg" alt="Client logo" class="client-logo">
+                <img src="visa steel limited.jpg" alt="Client logo" class="client-logo">
+                <img src="IBM.jpg" alt="Client logo" class="client-logo">
+				<img src="military.PNG" alt="Client logo" class="client-logo">
+				<img src="mani.PNG" alt="Client logo" class= " client-logo"
+				<img src="indianoil.PNG" alt="Client logo" class="client-logo">
+				<img src="bp.PNG" alt="Client logo" class="client-logo">
+				
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get Color Samples</h2>
+        <p>Request free samples or discuss bulk requirements</p>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="text" placeholder="Mobile Number">
+            <textarea rows="5" placeholder="Tell us about your color requirements..."></textarea>
+            <button type="submit" class="cta-button">Request Samples</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Wasser Polymer Pvt. Ltd. All rights reserved. | Kolkata, West Bengal, India</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling safeguard
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.length > 1) {
+                    e.preventDefault();
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Color card: copy hex
+        document.querySelectorAll('.color-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const swatch = this.querySelector('.color-swatch');
+                const hex = swatch.style.background.match(/#([a-fA-F0-9]{6})/)?.[1];
+                if (hex) {
+                    navigator.clipboard.writeText(`#${hex}`);
+                    alert(`Color #${hex} copied to clipboard!`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
